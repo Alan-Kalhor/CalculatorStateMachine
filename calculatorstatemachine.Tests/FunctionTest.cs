@@ -26,14 +26,14 @@ namespace calculatorstatemachine.Tests
 
             var state = new State
             {
-                Name = "MyStepFunctions"
+                Input1 = "4",
+                Input2 = "3"
             };
 
+            state = functions.Calculation(state, context);
 
-            state = functions.Greeting(state, context);
-
-            Assert.Equal(5, state.WaitInSeconds);
-            Assert.Equal("Hello MyStepFunctions", state.Message);
+            Assert.Equal(3, state.WaitInSeconds);
+            Assert.Equal("7", state.Result);
         }
     }
 }
