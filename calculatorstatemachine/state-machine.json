@@ -1,0 +1,62 @@
+﻿{
+  "Comment": "Calculator State Machine",
+  "StartAt": "Initial",
+  "States": {
+    "Initial": {
+      "Type": "Task",
+      "Resource": "${InitialTask.Arn}",
+      "Next": "Validation"
+    },
+    "Validation": {
+      "Type": "Task",
+      "Resource": "${ValidationTask.Arn}",
+      "Next": "WaitForValidation"
+    },
+    "WaitForValidation": {
+      "Type": "Wait",
+      "SecondsPath": "$.WaitInSeconds",
+      "Next": "Pass"
+    },
+    "Pass": {
+      "Type": "Task",
+      "Resource": "${PassTask.Arn}",
+      "Next": "ChoiceStateX"
+    },
+    "ChoiceStateX": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.IsValid",
+          "BooleanEquals": true,
+          "Next": "Calculation"
+        },
+        {
+          "Variable": "$.IsValid",
+          "BooleanEquals": false,
+          "Next": "PrintError"
+        }
+      ],
+      "Default": "PrintError"
+    },
+    "Calculation": {
+      "Type": "Task",
+      "Resource": "${CalculationTask.Arn}",
+      "Next": "WaitForCalculation"
+    },
+    "WaitForCalculation": {
+      "Type": "Wait",
+      "SecondsPath": "$.WaitInSeconds",
+      "Next": "PrintResult"
+    },
+    "PrintResult": {
+      "Type": "Task",
+      "Resource": "${PrintResultTask.Arn}",
+      "End": true
+    },
+    "PrintError": {
+      "Type": "Task",
+      "Resource": "${PrintErrorTask.Arn}",
+      "End": true
+    }
+  }
+}
