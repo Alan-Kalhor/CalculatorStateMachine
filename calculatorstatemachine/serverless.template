@@ -80,7 +80,7 @@
     "PrintErrorTask" : {
         "Type" : "AWS::Lambda::Function",
         "Properties" : {
-            "Handler" : "calculatorstatemachine::calculatorstatemachine.StepFunctionTasks::PrintResult",            
+            "Handler" : "calculatorstatemachine::calculatorstatemachine.StepFunctionTasks::PrintError",            
             "Role"    : {"Fn::GetAtt" : [ "LambdaRole", "Arn"]},
             "Runtime" : "dotnetcore2.1",
             "MemorySize" : 256,
