@@ -78,14 +78,14 @@ namespace calculatorstatemachine
         {
             state.Message = "The result of calculation is " + state.Result;
 
-            LogMessage(context, "Printing the result...");
+            LogMessage(context, "Printing the result..." + state.Result);
 
             return state;
         }
 
         public State PrintError(State state, ILambdaContext context)
         {
-            state.Message += ", Validation error ";
+            state.Message = "Validation error!";
 
             LogMessage(context, "Printing the error...");
 
