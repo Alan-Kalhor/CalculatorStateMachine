@@ -23,8 +23,6 @@ namespace calculatorstatemachine
 
         public State Initial(State state, ILambdaContext context)
         {
-            state.Message = $"Initial of state machine";
-
             LogMessage(context, state.ToString());
 
 
@@ -78,7 +76,7 @@ namespace calculatorstatemachine
 
         public State PrintResult(State state, ILambdaContext context)
         {
-            state.Message += ", The result of calculation is " + state.Result;
+            state.Message = "The result of calculation is " + state.Result;
 
             LogMessage(context, "Printing the result...");
 
